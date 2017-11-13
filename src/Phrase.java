@@ -4,32 +4,20 @@ public class Phrase {
 	private String	words = "";
 	private String	separator = " ";
 	
+	public void ajouter(String newWord) {
+		this.words += (this.words.equals("")) ? newWord : this.separator + newWord;
+	}
+	
 	public void ajouter(String... newWords) {
-		String[] newTab;
-		if (this.words.equals("")) {
-			newTab = new String[newWords.length];
-			System.arraycopy(newWords, 0, newTab, 0, newWords.length);
-		} else {
-			newTab = new String[1 + newWords.length];
-			newTab[0] = this.words;
-			System.arraycopy(newWords, 0, newTab, 1, newWords.length);
+		for (String newWord : newWords) {
+			this.ajouter(newWord);
 		}
-		this.words = String.join(separator, newTab);
 	}
 	
 	public void ajouter(String newWord, int iteration) {
-		String[] newTab;
-		if (this.words.equals("")) {
-			newTab =  new String[iteration];
-			newTab[0] = newWord;
-		} else {
-			newTab =  new String[1 + iteration];
-			newTab[0] = this.words;
-			for (int i = 0; i < iteration; ++i) {
-				newTab[1 + i] = newWord;
-			}
+		for (int i = 0; i < iteration; ++i) {
+			this.ajouter(newWord);
 		}
-		this.words = String.join(separator, newTab);
 	}
 	
 	public void setSeparateur(String separator) {
